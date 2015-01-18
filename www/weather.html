@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <title>weather</title>
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <script>
+            $(document).ready(function() {
+                $.get("current_temp.php", function(data) {
+                    $('#celsius').html('Current temperature: ' + data + ' &deg;C');
+                });
+                setInterval(function() {
+                    $.get("current_temp.php", function(data) {
+                        $('#celsius').html('Current temperature: ' + data + ' &deg;C');
+                    })
+                }, 60000);
+            })
+        </script>
+        <style type='text/css'>
+            #celsius { font-family: "Raleway", sans-serif; font-size: x-large;}
+        </style>
+    </head>
+    <body>
+        <p><div id='celsius'></div></p>
+        <iframe width="800" height="600" frameborder="0" seamless="seamless" scrolling="no"
+            src="https://plot.ly/~vn14/42.embed?width=800&height=600"></iframe>
+    </body>
+</html>
