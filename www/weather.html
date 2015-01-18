@@ -7,18 +7,17 @@
         <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
         <script>
             $(document).ready(function() {
-                $.get("current_temp.php", function(data) {
-                    $('#celsius').html('Current: ' + data + ' &deg;C');
+                $.get("temp.php", function(data) {
+                    temp = $.parseJSON(data);
+                    $('#celsius').html('Current: ' + temp['now'] + ' &deg;C ' +
+                        '| Minimum: ' + temp['min'] + ' &deg;C ' +
+                        '| Maximum: ' + temp['max'] + ' &deg;C '
+                    );
+                    d = new Date(temp['time'] * 1000);
+                    $("#timestamp").html(d);
+                    $("#timestamp").attr("title", d.toISOString());
+                    $("#timestamp").timeago();
                 });
-                d = new Date();
-                $("#timestamp").html(d);
-                $("#timestamp").attr("title", d.toISOString());
-                $("#timestamp").timeago();
-                setInterval(function() {
-                    $.get("current_temp.php", function(data) {
-                        $('#celsius').html('Current: ' + data + ' &deg;C');
-                    })
-                }, 60000);
             })
         </script>
         <style type='text/css'>
@@ -29,7 +28,7 @@
     <body>
         <p>
             <div id='celsius'></div>
-            <sup id='lastupdated'>Updated <abbr id='timestamp' title=''></abbr></sup>
+            <sup id='lastupdated'>Recorded <abbr id='timestamp' title=''></abbr></sup>
         </p>
         <iframe width="800" height="600" frameborder="0" seamless="seamless" scrolling="no"
             src="https://plot.ly/~vn14/42.embed?width=800&height=600"></iframe>
