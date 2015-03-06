@@ -37,5 +37,5 @@ fi
 # ftp to dest and rm local
 for file in $files; do
     ncftpput -u $ftp_user -p $ftp_pass -R -v $destination_host $destination_path "$source_path/$file" && rm -rf "$source_path/$file"
-    [ $? -eq 0 ] && echo "Moved $file"
+    [ $? -eq 0 ] && echo "Moved '$file'"
 done
