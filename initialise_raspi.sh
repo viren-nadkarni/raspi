@@ -23,7 +23,17 @@ apt-get autoremove
 
 apt-get clean
 
-apt-get install -y avahi-daemon colordiff transmission build-essential cython python python-dev python-ipy git apache2 mysql-server samba ncftp vim locate
+apt-get install -y avahi-daemon colordiff transmission transmission-daemon build-essential cython python python-dev python-ipy git apache2 mysql-server samba ncftp vim locate
 
-
+# apache
 a2enmod ssl proxy_http 
+cp default default-ssl /etc/apache2/site-available
+cp proxy.conf /etc/apache2/mods-available
+htpasswd -c /etc/htpasswd viren
+
+# transmission
+mkdir /home/viren/bittorrent/download -p
+mkdir /home/viren/bittorrent/incomplete -p
+chown -R debian-transmission:debian-transmission /home/viren/bittorrent/download
+chown -R debian-transmission:debian-transmission /home/viren/bittorrent/incomplete
+chmod a+rwx /home/viren/bittorrent/download
