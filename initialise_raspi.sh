@@ -9,7 +9,6 @@ groupmod -n viren pi
 ln -s /home/viren/ /home/pi
 visudo
 
-echo -e '\n' >> /etc/apt/sources.list
 echo -e '\ndeb http://archive.raspbian.org/raspbian wheezy main contrib non-free' >> /etc/apt/sources.list
 echo -e '\ndeb-src http://archive.raspbian.org/raspbian wheezy main contrib non-free' >> /etc/apt/sources.list
 
@@ -23,7 +22,7 @@ apt-get autoremove
 
 apt-get clean
 
-apt-get install -y avahi-daemon colordiff transmission transmission-daemon build-essential cython python python-dev python-ipy git apache2 mysql-server samba ncftp vim locate
+apt-get install -y avahi-daemon colordiff transmission transmission-daemon build-essential cython python python-dev python-ipy git apache2 mysql-server samba ncftp vim locate exuberant-ctags screen
 
 # apache
 a2enmod ssl proxy_http 
@@ -37,3 +36,6 @@ mkdir /home/viren/bittorrent/incomplete -p
 chown -R debian-transmission:debian-transmission /home/viren/bittorrent/download
 chown -R debian-transmission:debian-transmission /home/viren/bittorrent/incomplete
 chmod a+rwx /home/viren/bittorrent/download
+
+# create ~/.plotly_token
+# create ~/.duckdns_token
